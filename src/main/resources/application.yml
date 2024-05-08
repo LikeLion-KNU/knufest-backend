@@ -1,7 +1,3 @@
-server:
-  port: 8081
-
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,9 +7,9 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hiberenate:
-        fomat_sql: flase
+        fomat_sql: false
         dialect: org.hibernate.dialect.MySQL8Dialect

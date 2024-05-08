@@ -11,7 +11,5 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class BoothDto {
     int id;
-    String name;
     int likes;
-    int views;
 }

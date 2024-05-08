@@ -1,4 +1,4 @@
-package LlikelionKNU.KNUfest.domain.booth.dto;
+package LlikelionKNU.KNUfest.global.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,9 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @RequiredArgsConstructor
-public class CommentDto {
-    String name;
-    String content;
-    String password;
+@AllArgsConstructor
+public class BasicResponse {
+    private int status;
+    private String message;
 }

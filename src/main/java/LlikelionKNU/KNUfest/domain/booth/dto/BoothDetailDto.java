@@ -1,5 +1,6 @@
 package LlikelionKNU.KNUfest.domain.booth.dto;
 
+import LlikelionKNU.KNUfest.domain.comment.dto.CommentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,12 +10,8 @@ import java.util.List;
 
 @Data
 @Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class BoothDetailDto {
     int id;
-    String name;
     int likes;
-    int views;
     List<CommentDto> comments;
 }
