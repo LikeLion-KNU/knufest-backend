@@ -78,7 +78,6 @@ public class CommentServiceImpl implements CommentService{
             }else{
                 throw new PasswordWrongException("비밀번호가 틀렸습니다.");
             }
-
         }
     }
 }
