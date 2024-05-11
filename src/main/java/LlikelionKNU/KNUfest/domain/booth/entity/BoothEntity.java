@@ -3,10 +3,7 @@ package LlikelionKNU.KNUfest.domain.booth.entity;
 import LlikelionKNU.KNUfest.domain.comment.entity.CommentEntity;
 import LlikelionKNU.KNUfest.global.basic.BasicEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.util.List;
@@ -16,6 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "BOOTH")
 public class BoothEntity extends BasicEntity {
 

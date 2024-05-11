@@ -1,5 +1,6 @@
 package LlikelionKNU.KNUfest.domain.booth.service;
 
+import LlikelionKNU.KNUfest.domain.booth.dto.AllBoothDto;
 import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetailDto;
 import LlikelionKNU.KNUfest.domain.booth.dto.BoothDto;
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
@@ -20,23 +21,27 @@ public class BoothServiceImpl implements BoothService{
     private final BoothRepository boothrepository;
     private final CommentService commentService;
     @Override
-    public List<BoothDto> getAllbooth() {
+    public AllBoothDto getAllbooth() {
 
         List<BoothEntity> boothes = boothrepository.findAll();
-        List<BoothDto> results;
+        List<BoothDto> boothDtos;
+        AllBoothDto result;
 
         if(boothes.isEmpty()) {
             throw new NoExistException("부스 전체 정보가 없습니다.");
         }else{
-            results = new ArrayList<>();
+            boothDtos = new ArrayList<>();
             for(BoothEntity booth : boothes){
 
-                results.add(BoothDto.builder()
+                boothDtos.add(BoothDto.builder()
                                 .id(booth.getId().intValue())
                                 .likes(booth.getLikes())
                         .build());
             }
-            return results;
+            return AllBoothDto.builder()
+                    .count(boothDtos.size())
+                    .boothDtoes(boothDtos)
+                    .build();
         }
     }
 

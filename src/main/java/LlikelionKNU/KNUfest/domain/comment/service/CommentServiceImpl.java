@@ -7,6 +7,7 @@ import LlikelionKNU.KNUfest.domain.comment.dto.CommentRequest;
 import LlikelionKNU.KNUfest.domain.comment.entity.CommentEntity;
 import LlikelionKNU.KNUfest.domain.comment.repository.CommentRepository;
 import LlikelionKNU.KNUfest.global.error.NoExistException;
+import LlikelionKNU.KNUfest.global.error.PasswordWrongException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +73,12 @@ public class CommentServiceImpl implements CommentService{
         if(commentOp.isEmpty()) {
             throw new NoExistException("해당 댓글은 없습니다. (id 확인 요망)");
         }else{
-            commentRepository.delete(commentOp.get());
+            if(commentOp.get().getPassword().equals(password)){
+                commentRepository.delete(commentOp.get());
+            }else{
+                throw new PasswordWrongException("비밀번호가 틀렸습니다.");
+            }
+
         }
     }
 }
