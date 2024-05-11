@@ -1,14 +1,11 @@
 package LlikelionKNU.KNUfest.domain.booth.service;
 
-import LlikelionKNU.KNUfest.domain.booth.dto.AllBoothDto;
-import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetailDto;
-import LlikelionKNU.KNUfest.domain.booth.dto.BoothDto;
-
-import java.util.List;
+import LlikelionKNU.KNUfest.domain.booth.dto.AllBooth;
+import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetail;
 
 public interface BoothService {
-    AllBoothDto getAllbooth();
-    BoothDetailDto getBooth(int id);
+    AllBooth getAllbooth();
+    BoothDetail getBooth(int id);
     void updateLikes(int id);
 
 }

@@ -1,8 +1,8 @@
 package LlikelionKNU.KNUfest.domain.booth.service;
 
-import LlikelionKNU.KNUfest.domain.booth.dto.AllBoothDto;
-import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetailDto;
-import LlikelionKNU.KNUfest.domain.booth.dto.BoothDto;
+import LlikelionKNU.KNUfest.domain.booth.dto.AllBooth;
+import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetail;
+import LlikelionKNU.KNUfest.domain.booth.dto.Booth;
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
 import LlikelionKNU.KNUfest.domain.booth.repository.BoothRepository;
 import LlikelionKNU.KNUfest.domain.comment.service.CommentService;
@@ -21,11 +21,11 @@ public class BoothServiceImpl implements BoothService{
     private final BoothRepository boothrepository;
     private final CommentService commentService;
     @Override
-    public AllBoothDto getAllbooth() {
+    public AllBooth getAllbooth() {
 
         List<BoothEntity> boothes = boothrepository.findAll();
-        List<BoothDto> boothDtos;
-        AllBoothDto result;
+        List<Booth> boothDtos;
+        AllBooth result;
 
         if(boothes.isEmpty()) {
             throw new NoExistException("부스 전체 정보가 없습니다.");
@@ -33,12 +33,12 @@ public class BoothServiceImpl implements BoothService{
             boothDtos = new ArrayList<>();
             for(BoothEntity booth : boothes){
 
-                boothDtos.add(BoothDto.builder()
+                boothDtos.add(Booth.builder()
                                 .id(booth.getId().intValue())
                                 .likes(booth.getLikes())
                         .build());
             }
-            return AllBoothDto.builder()
+            return AllBooth.builder()
                     .count(boothDtos.size())
                     .boothDtoes(boothDtos)
                     .build();
@@ -46,14 +46,14 @@ public class BoothServiceImpl implements BoothService{
     }
 
     @Override
-    public BoothDetailDto getBooth(int id) {
+    public BoothDetail getBooth(int id) {
         Optional<BoothEntity> boothOp = boothrepository.findById(Long.valueOf(id));
 
         if(boothOp.isEmpty()){
             throw new NoExistException("해당 부스 정보가 없습니다. (id 확인요망)");
         }else{
             BoothEntity booth = boothOp.get();
-            return BoothDetailDto.builder()
+            return BoothDetail.builder()
                     .id(booth.getId().intValue())
                     .likes(booth.getLikes())
                     .comments(commentService.getCommentPage(boothOp.get().getId().intValue(),5,1, "default"))

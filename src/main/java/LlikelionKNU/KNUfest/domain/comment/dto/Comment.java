@@ -2,16 +2,14 @@ package LlikelionKNU.KNUfest.domain.comment.dto;
 
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
 import LlikelionKNU.KNUfest.domain.comment.entity.CommentEntity;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
 
 @Data
 @Builder
-public class CommentDto {
+public class Comment {
     int id;
     String name;
     String comment;

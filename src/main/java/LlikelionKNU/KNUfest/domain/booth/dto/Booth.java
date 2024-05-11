@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class AllBoothDto {
-    private int count;
-    private List<BoothDto> boothDtoes;
+public class Booth {
+    int id;
+    int likes;
 }

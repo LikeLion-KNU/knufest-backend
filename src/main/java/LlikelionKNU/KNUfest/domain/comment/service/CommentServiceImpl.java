@@ -2,7 +2,7 @@ package LlikelionKNU.KNUfest.domain.comment.service;
 
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
 import LlikelionKNU.KNUfest.domain.booth.repository.BoothRepository;
-import LlikelionKNU.KNUfest.domain.comment.dto.CommentDto;
+import LlikelionKNU.KNUfest.domain.comment.dto.Comment;
 import LlikelionKNU.KNUfest.domain.comment.dto.CommentRequest;
 import LlikelionKNU.KNUfest.domain.comment.entity.CommentEntity;
 import LlikelionKNU.KNUfest.domain.comment.repository.CommentRepository;
@@ -21,11 +21,11 @@ public class CommentServiceImpl implements CommentService{
     private final CommentRepository commentRepository;
     private final BoothRepository boothRepository;
     @Override
-    public List<CommentDto> getCommentPage(int boothId, int perpage, int page, String order) {
+    public List<Comment> getCommentPage(int boothId, int perpage, int page, String order) {
 
         Optional<BoothEntity> boothOp =  boothRepository.findById(Long.valueOf(boothId));
         List<CommentEntity> comments;
-        List<CommentDto> result;
+        List<Comment> result;
 
         if(boothOp.isEmpty()){
             throw new NoExistException("댓글을 불러올 부스 정보가 없습니다. (id 확인 요망)");
@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService{
 
         Optional<BoothEntity> boothOp =  boothRepository.findById(Long.valueOf(boothId));
 
-        CommentDto comment = CommentDto.builder()
+        Comment comment = Comment.builder()
                 .name(commentRequest.getName())
                 .comment(commentRequest.getComment())
                 .password(commentRequest.getPassword())

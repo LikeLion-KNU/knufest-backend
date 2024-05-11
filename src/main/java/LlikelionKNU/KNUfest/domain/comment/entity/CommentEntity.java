@@ -2,7 +2,7 @@ package LlikelionKNU.KNUfest.domain.comment.entity;
 
 
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
-import LlikelionKNU.KNUfest.domain.comment.dto.CommentDto;
+import LlikelionKNU.KNUfest.domain.comment.dto.Comment;
 import LlikelionKNU.KNUfest.global.basic.BasicEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,8 +30,8 @@ public class CommentEntity extends BasicEntity {
     @JoinColumn(name = "booth_id")
     private BoothEntity booth;
 
-    public CommentDto toDto(){
-        return CommentDto.builder()
+    public Comment toDto(){
+        return Comment.builder()
                 .id(this.getId().intValue())
                 .name(this.name)
                 .password(this.password)
