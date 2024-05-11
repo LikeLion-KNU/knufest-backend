@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql-container:3306/knufest
+    url: jdbc:mysql://mysql-withvol:3306/knufest
     username: user
     password: 1234
 
