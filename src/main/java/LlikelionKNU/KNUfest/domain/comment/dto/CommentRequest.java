@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class CommentRequest {
-    String name;
-    String comment;
-    String password;
+    private String name;
+    private String comment;
+    private String password;
 }

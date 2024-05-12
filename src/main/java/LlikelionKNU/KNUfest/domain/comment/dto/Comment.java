@@ -10,11 +10,11 @@ import java.time.Instant;
 @Data
 @Builder
 public class Comment {
-    Long id;
-    String name;
-    String comment;
-    String password;
-    Instant created;
+    private Long id;
+    private String name;
+    private String comment;
+    private String password;
+    private Instant created;
 
     public CommentEntity toEntity(BoothEntity booth){
         return CommentEntity.builder()

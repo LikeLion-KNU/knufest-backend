@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Booth {
-    Long id;
-    String boothName;
-    int likes;
-    boolean Likable;
+    private Long id;
+    private String boothName;
+    private int likes;
+    private boolean Likable;
 }
