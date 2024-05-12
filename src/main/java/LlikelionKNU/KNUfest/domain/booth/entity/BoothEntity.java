@@ -17,9 +17,13 @@ import java.util.List;
 @Table(name = "BOOTH")
 public class BoothEntity extends BasicEntity {
 
+    @Column(name="booth_name")
+    private String boothName;
+
     @Column(name="likes")
     @ColumnDefault("0")
     private int likes;
+
 
     @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;

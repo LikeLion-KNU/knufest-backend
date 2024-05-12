@@ -35,6 +35,7 @@ public class BoothServiceImpl implements BoothService{
 
                 boothDtos.add(Booth.builder()
                                 .id(booth.getId().intValue())
+                                .boothName(booth.getBoothName())
                                 .likes(booth.getLikes())
                         .build());
             }
@@ -53,9 +54,12 @@ public class BoothServiceImpl implements BoothService{
             throw new NoExistException("해당 부스 정보가 없습니다. (id 확인요망)");
         }else{
             BoothEntity booth = boothOp.get();
+
             return BoothDetail.builder()
                     .id(booth.getId().intValue())
+                    .boothName(booth.getBoothName())
                     .likes(booth.getLikes())
+                    .urls(booth.getUrls().toString())
                     .comments(commentService.getCommentPage(boothOp.get().getId().intValue(),5,1, "default"))
                     .build();
         }
