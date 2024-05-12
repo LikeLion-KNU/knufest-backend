@@ -32,7 +32,7 @@ public class CommentEntity extends BasicEntity {
 
     public Comment toDto(){
         return Comment.builder()
-                .id(this.getId().intValue())
+                .id(this.getId())
                 .name(this.name)
                 .password(this.password)
                 .comment(this.comment)

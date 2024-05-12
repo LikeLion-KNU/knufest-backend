@@ -8,11 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserBoothRepository extends JpaRepository<UserBoothEntity, Long> {
 
     List<UserBoothEntity> findAllByUserId(Long userId);
 
-    UserBoothEntity findByUserIdAndBoothId(Long userId, Long BoothId);
+    Optional<UserBoothEntity> findByUserIdAndBoothId(Long userId, Long BoothId);
 }

@@ -9,10 +9,11 @@ import java.util.List;
 @Data
 @Builder
 public class BoothDetail {
-    int id;
+    Long id;
     String boothName;
     int likes;
     List<String> urls;
+    boolean Likable;
 
     List<Comment> comments;
 }

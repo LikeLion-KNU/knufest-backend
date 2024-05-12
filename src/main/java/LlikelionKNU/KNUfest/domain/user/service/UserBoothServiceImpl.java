@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class UserBoothServiceImpl implements UserBoothService{
     }
 
     @Override
-    public UserBoothEntity getUserBooth(Long userId, Long boothId) {
+    public Optional<UserBoothEntity> getUserBooth(Long userId, Long boothId) {
         return userBoothRepository.findByUserIdAndBoothId(userId, boothId);
     }
 

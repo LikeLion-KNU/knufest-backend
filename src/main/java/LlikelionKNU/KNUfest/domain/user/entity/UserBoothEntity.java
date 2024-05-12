@@ -1,6 +1,7 @@
 package LlikelionKNU.KNUfest.domain.user.entity;
 
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
+import LlikelionKNU.KNUfest.global.basic.BasicEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserBoothEntity {
+public class UserBoothEntity extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")

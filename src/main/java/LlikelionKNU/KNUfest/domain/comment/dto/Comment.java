@@ -10,7 +10,7 @@ import java.time.Instant;
 @Data
 @Builder
 public class Comment {
-    int id;
+    Long id;
     String name;
     String comment;
     String password;

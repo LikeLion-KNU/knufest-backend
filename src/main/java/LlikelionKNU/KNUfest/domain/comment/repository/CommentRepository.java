@@ -14,8 +14,8 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
     @Query(value = "select * from booth_comment where booth_id= :boothId order by id limit :lim offset :offset",
             nativeQuery = true)
-    List<CommentEntity> findAllOrderById(@Param("boothId") int boothId, @Param("lim") int limit, @Param("offset") int offset);
+    List<CommentEntity> findAllOrderById(@Param("boothId") Long boothId, @Param("lim") int limit, @Param("offset") int offset);
     @Query(value = "select * from booth_comment where booth_id= :boothId order by id desc limit :lim offset :off",
             nativeQuery = true)
-    List<CommentEntity> findAllOrderByIdDESC(@Param("boothId") int boothId, @Param("lim") int limit, @Param("off") int offset);
+    List<CommentEntity> findAllOrderByIdDESC(@Param("boothId") Long boothId, @Param("lim") int limit, @Param("off") int offset);
 }

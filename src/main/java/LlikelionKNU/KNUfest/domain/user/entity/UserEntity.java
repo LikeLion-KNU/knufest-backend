@@ -1,6 +1,7 @@
 package LlikelionKNU.KNUfest.domain.user.entity;
 
 
+import LlikelionKNU.KNUfest.global.basic.BasicEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class UserEntity {
+public class UserEntity extends BasicEntity {
 
     @Column(name = "userHash")
     private String userHash;

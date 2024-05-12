@@ -20,7 +20,7 @@ public class CommentController {
     @GetMapping("booth/{boothId}/comment")
     @Operation(summary = "추가 댓글 조회", description = "해당 부스의 추가 댓글내용을 제공한다. perpage = 요청당 댓글 개수 한 페이지 당 통일되게 보내야 됨, page = 요청 댓글 set 순번. order = 댓글 정렬순서 최신순은 'desc' 오래된 순은 'default' 이다. ")
     public ResponseEntity<List<Comment>> getExtraCommentPage(
-            @PathVariable("boothId") int boothId,
+            @PathVariable("boothId") Long boothId,
             @RequestParam("perpage") int perpage,
             @RequestParam("page") int page,
             @RequestParam("order") String order
@@ -32,11 +32,11 @@ public class CommentController {
     @PostMapping("booth/{boothId}/comment")
     @Operation(summary = "특정부스 댓글 생성", description = "특정 부스에 댓글을 생성한다.")
     public ResponseEntity<BasicResponse> postComment(
-            @PathVariable("boothId") int boothId,
+            @PathVariable("boothId") Long boothId,
             @RequestBody CommentRequest comment
     ){
 
-        int id = service.postComment(boothId, comment);
+        Long id = service.postComment(boothId, comment);
 
         BasicResponse response = BasicResponse.builder()
                 .message(boothId+"번 부스에 댓글을 생성하였습니다.")
@@ -49,7 +49,7 @@ public class CommentController {
     @DeleteMapping("comment/{commentId}")
     @Operation(summary = "특정 댓글 삭제", description = "특정 댓글을 password 가 일치할 경우 삭제한다.")
     public ResponseEntity<BasicResponse> deleteComment(
-            @PathVariable("commentId") int commentId,
+            @PathVariable("commentId") Long commentId,
             @RequestParam("password") String password
     ){
 

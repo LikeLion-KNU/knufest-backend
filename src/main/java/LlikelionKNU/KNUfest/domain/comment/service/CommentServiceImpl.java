@@ -21,9 +21,9 @@ public class CommentServiceImpl implements CommentService{
     private final CommentRepository commentRepository;
     private final BoothRepository boothRepository;
     @Override
-    public List<Comment> getCommentPage(int boothId, int perpage, int page, String order) {
+    public List<Comment> getCommentPage(Long boothId, int perpage, int page, String order) {
 
-        Optional<BoothEntity> boothOp =  boothRepository.findById(Long.valueOf(boothId));
+        Optional<BoothEntity> boothOp =  boothRepository.findById(boothId);
         List<CommentEntity> comments;
         List<Comment> result;
 
@@ -47,9 +47,9 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public int postComment(int boothId, CommentRequest commentRequest) {
+    public Long postComment(Long boothId, CommentRequest commentRequest) {
 
-        Optional<BoothEntity> boothOp =  boothRepository.findById(Long.valueOf(boothId));
+        Optional<BoothEntity> boothOp =  boothRepository.findById(boothId);
 
         Comment comment = Comment.builder()
                 .name(commentRequest.getName())
@@ -62,13 +62,13 @@ public class CommentServiceImpl implements CommentService{
         }else{
             CommentEntity newComment = comment.toEntity(boothOp.get());
             commentRepository.save(newComment);
-            return newComment.getId().intValue();
+            return newComment.getId();
         }
     }
 
     @Override
-    public void deleteComment(int commentId, String password) {
-        Optional<CommentEntity> commentOp = commentRepository.findById(Long.valueOf(commentId));
+    public void deleteComment(Long commentId, String password) {
+        Optional<CommentEntity> commentOp = commentRepository.findById(commentId);
 
         if(commentOp.isEmpty()) {
             throw new NoExistException("해당 댓글은 없습니다. (id 확인 요망)");
