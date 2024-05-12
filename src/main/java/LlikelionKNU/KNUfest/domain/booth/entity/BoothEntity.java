@@ -1,6 +1,7 @@
 package LlikelionKNU.KNUfest.domain.booth.entity;
 
 import LlikelionKNU.KNUfest.domain.comment.entity.CommentEntity;
+import LlikelionKNU.KNUfest.domain.user.entity.UserBoothEntity;
 import LlikelionKNU.KNUfest.global.basic.BasicEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,9 @@ public class BoothEntity extends BasicEntity {
 
     @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;
+
+    @OneToMany(mappedBy = "boothEntity", fetch = FetchType.LAZY)
+    private UserBoothEntity userBoothEntity;
 
     @ElementCollection
     @CollectionTable(
