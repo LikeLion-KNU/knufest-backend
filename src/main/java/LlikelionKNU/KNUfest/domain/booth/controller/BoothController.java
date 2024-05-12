@@ -17,24 +17,27 @@ public class BoothController {
 
     @GetMapping()
     @Operation(summary = "모든 부스정보 조회", description = "모든 부스의 id와 좋아요를 보내준다. 그 부스 목록에 뜨는 걸로 쓰면 됨")
-    public ResponseEntity<AllBooth> getAllbooth(){
-        AllBooth booths = service.getAllbooth();
+    public ResponseEntity<AllBooth> getAllbooth(
+            @RequestParam("userHash") String userHash
+    ){
+        AllBooth booths = service.getAllbooth(userHash);
         return ResponseEntity.ok().body(booths);
     }
 
     @GetMapping("{boothId}")
     @Operation(summary = "특정 부스정보 조회", description = "특정 부스의 id, 좋아요, 오래된 순 댓글 5개를 보내준다. 부스 별 페이지에 갖다 쓰면 됨" )
     public ResponseEntity<BoothDetail> getBooth(
-            @PathVariable("boothId") int boothId
+            @PathVariable("boothId") Long boothId,
+            @RequestParam("userHash") String userHash
     ){
-        BoothDetail boothDto = service.getBooth(boothId);
+        BoothDetail boothDto = service.getBooth(boothId, userHash);
         return ResponseEntity.ok().body(boothDto);
     }
 
     @PatchMapping("{boothId}")
     @Operation(summary = "특정 부스 좋아요 업데이트", description = "특정 부스의 좋아요를 +1 한다.")
     public ResponseEntity<BasicResponse> updateLikes(
-            @PathVariable("boothId") int boothId
+            @PathVariable("boothId") Long boothId
     ){
         service.updateLikes(boothId);
         BasicResponse response = BasicResponse.builder()
