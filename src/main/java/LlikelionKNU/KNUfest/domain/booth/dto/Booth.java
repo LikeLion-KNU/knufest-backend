@@ -13,5 +13,4 @@ public class Booth {
     int id;
     String boothName;
     int likes;
-    String urls;
 }

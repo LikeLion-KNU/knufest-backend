@@ -12,7 +12,7 @@ public class BoothDetail {
     int id;
     String boothName;
     int likes;
-    String urls;
+    List<String> urls;
 
     List<Comment> comments;
 }

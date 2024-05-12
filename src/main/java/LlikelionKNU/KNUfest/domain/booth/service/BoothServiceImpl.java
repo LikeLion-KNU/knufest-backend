@@ -25,7 +25,6 @@ public class BoothServiceImpl implements BoothService{
 
         List<BoothEntity> boothes = boothrepository.findAll();
         List<Booth> boothDtos;
-        AllBooth result;
 
         if(boothes.isEmpty()) {
             throw new NoExistException("부스 전체 정보가 없습니다.");
@@ -59,7 +58,7 @@ public class BoothServiceImpl implements BoothService{
                     .id(booth.getId().intValue())
                     .boothName(booth.getBoothName())
                     .likes(booth.getLikes())
-                    .urls(booth.getUrls().toString())
+                    .urls(booth.getUrls())
                     .comments(commentService.getCommentPage(boothOp.get().getId().intValue(),5,1, "default"))
                     .build();
         }
