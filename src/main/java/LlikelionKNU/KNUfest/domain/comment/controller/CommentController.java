@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,9 +24,10 @@ public class CommentController {
             @PathVariable("boothId") Long boothId,
             @RequestParam("perpage") int perpage,
             @RequestParam("page") int page,
-            @RequestParam("order") String order
+            @RequestParam("order") String order,
+            @RequestParam("userHash") String userHash
     ){
-        List<Comment> result = service.getCommentPage(boothId, perpage, page, order);
+        List<Comment> result = service.getCommentPage(boothId, perpage, page, order, userHash);
         return ResponseEntity.ok().body(result);
     }
 
@@ -33,14 +35,16 @@ public class CommentController {
     @Operation(summary = "특정부스 댓글 생성", description = "특정 부스에 댓글을 생성한다.")
     public ResponseEntity<BasicResponse> postComment(
             @PathVariable("boothId") Long boothId,
-            @RequestBody CommentRequest comment
+            @RequestParam("userHash") String userHash,
+            @RequestBody CommentRequest commentRequest
     ){
 
-        Long id = service.postComment(boothId, comment);
+        Long id = service.postComment(boothId, commentRequest, userHash);
 
         BasicResponse response = BasicResponse.builder()
-                .message(boothId+"번 부스에 댓글을 생성하였습니다.")
+                .message(boothId+"번 부스에 " + id + "번째 댓글을 생성하였습니다.")
                 .status(201)
+                .timeStamp(LocalDateTime.now())
                 .build();
 
         return ResponseEntity.created(URI.create("comment"+id)).body(response);
@@ -50,14 +54,14 @@ public class CommentController {
     @Operation(summary = "특정 댓글 삭제", description = "특정 댓글을 password 가 일치할 경우 삭제한다.")
     public ResponseEntity<BasicResponse> deleteComment(
             @PathVariable("commentId") Long commentId,
-            @RequestParam("password") String password
+            @RequestParam("userHash") String userHash
     ){
-
-        service.deleteComment(commentId, password);
+        service.deleteComment(commentId, userHash);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .message("성공적으로 삭제되었습니다.")
                 .status(200)
+                .timeStamp(LocalDateTime.now())
                 .build();
 
         return ResponseEntity.ok().body(basicResponse);

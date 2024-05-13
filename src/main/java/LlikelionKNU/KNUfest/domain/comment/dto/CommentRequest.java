@@ -8,5 +8,4 @@ import lombok.RequiredArgsConstructor;
 public class CommentRequest {
     private String name;
     private String comment;
-    private String password;
 }
