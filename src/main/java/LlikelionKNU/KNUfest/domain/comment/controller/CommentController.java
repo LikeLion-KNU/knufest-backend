@@ -51,7 +51,7 @@ public class CommentController {
     }
 
     @DeleteMapping("comment/{commentId}")
-    @Operation(summary = "특정 댓글 삭제", description = "특정 댓글을 password 가 일치할 경우 삭제한다.")
+    @Operation(summary = "특정 댓글 삭제", description = "특정 댓글을 userHash 값을 통해 비교하여 삭제한다.")
     public ResponseEntity<BasicResponse> deleteComment(
             @PathVariable("commentId") Long commentId,
             @RequestParam("userHash") String userHash
