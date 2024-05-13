@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 public class UserBoothEntity extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "sex")
+    @JoinColumn(name = "userId")
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ex")
+    @JoinColumn(name = "boothId")
     private BoothEntity booth;
 
 }
