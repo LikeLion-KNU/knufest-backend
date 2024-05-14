@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("api/v1/booth")
 @RequiredArgsConstructor
@@ -35,14 +37,16 @@ public class BoothController {
     }
 
     @PatchMapping("{boothId}")
-    @Operation(summary = "특정 부스 좋아요 업데이트", description = "특정 부스의 좋아요를 +1 한다.")
+    @Operation(summary = "특정 부스 좋아요 업데이트", description = "특정 부스의 좋아요를 변경한다.")
     public ResponseEntity<BasicResponse> updateLikes(
-            @PathVariable("boothId") Long boothId
+            @PathVariable("boothId") Long boothId,
+            @RequestParam("userHash") String userHash
     ){
-        service.updateLikes(boothId);
+        String message = service.updateLikes(boothId, userHash);
         BasicResponse response = BasicResponse.builder()
-                .message("좋아요를 성공적으로 업데이트(+1) 하였습니다.")
+                .message(message)
                 .status(200)
+                .timeStamp(LocalDateTime.now())
                 .build();
         return ResponseEntity.ok().body(response);
     }

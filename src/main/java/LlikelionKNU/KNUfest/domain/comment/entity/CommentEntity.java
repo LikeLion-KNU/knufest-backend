@@ -3,6 +3,7 @@ package LlikelionKNU.KNUfest.domain.comment.entity;
 
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
 import LlikelionKNU.KNUfest.domain.comment.dto.Comment;
+import LlikelionKNU.KNUfest.domain.user.entity.UserEntity;
 import LlikelionKNU.KNUfest.global.basic.BasicEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,18 +24,18 @@ public class CommentEntity extends BasicEntity {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "password", length = 10)
-    private String password;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "boothId")
+    private BoothEntity booth;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "booth_id")
-    private BoothEntity booth;
+    @JoinColumn(name = "userId")
+    private UserEntity user;
 
     public Comment toDto(){
         return Comment.builder()
                 .id(this.getId())
                 .name(this.name)
-                .password(this.password)
                 .comment(this.comment)
                 .created(this.getCreatedAt())
                 .build();

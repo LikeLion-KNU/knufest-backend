@@ -29,8 +29,8 @@ public class BoothEntity extends BasicEntity {
     @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;
 
-    @OneToMany(mappedBy = "boothEntity", fetch = FetchType.LAZY)
-    private UserBoothEntity userBoothEntity;
+    @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
+    private List<UserBoothEntity> userBoothEntity;
 
     @ElementCollection
     @CollectionTable(

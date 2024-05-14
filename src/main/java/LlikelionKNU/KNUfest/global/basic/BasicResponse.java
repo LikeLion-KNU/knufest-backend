@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @RequiredArgsConstructor
@@ -12,4 +14,5 @@ import lombok.RequiredArgsConstructor;
 public class BasicResponse {
     private int status;
     private String message;
+    private LocalDateTime timeStamp;
 }
