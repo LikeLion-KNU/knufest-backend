@@ -49,11 +49,14 @@ public class BoothServiceImpl implements BoothService{
                         .build());
             }
 
-            for(UserBoothEntity userBooth : userBoothEntityList){
-                Booth tempbooth = boothDtos.get(userBooth.getBooth().getId().intValue()-1);
-                tempbooth.setLikable(false);
-                boothDtos.set(userBooth.getBooth().getId().intValue()-1, tempbooth);
+            if(!userBoothEntityList.isEmpty()){
+                for(UserBoothEntity userBooth : userBoothEntityList){
+                    Booth tempbooth = boothDtos.get(userBooth.getBooth().getId().intValue()-1);
+                    tempbooth.setLikable(false);
+                    boothDtos.set(userBooth.getBooth().getId().intValue()-1, tempbooth);
+                }
             }
+
 
             return AllBooth.builder()
                     .count(boothDtos.size())

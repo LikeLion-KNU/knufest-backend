@@ -47,14 +47,17 @@ public class CommentServiceImpl implements CommentService{
         }else{
             comments = commentRepository.findAllOrderById(booth.getId(), perpage, offset);
         }
-        for(CommentEntity c: comments){
-            Comment comment = c.toDto();
-            if(c.getUser().getUserHash().equals(userHash)){
-                comment.setDeleteable(true);
-            }else{
-                comment.setDeleteable(false);
+
+        if(!comments.isEmpty()) {
+            for (CommentEntity c : comments) {
+                Comment comment = c.toDto();
+                if (c.getUser().getUserHash().equals(userHash)) {
+                    comment.setDeleteable(true);
+                } else {
+                    comment.setDeleteable(false);
+                }
+                result.add(comment);
             }
-            result.add(comment);
         }
         return result;
 
