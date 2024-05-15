@@ -25,6 +25,12 @@ public class BoothEntity extends BasicEntity {
     @ColumnDefault("0")
     private int likes;
 
+    @Column(name="categori")
+    private String categori;
+
+    @Column(name="booth_num")
+    private int boothnum;
+
 
     @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;

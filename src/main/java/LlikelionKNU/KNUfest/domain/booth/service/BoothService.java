@@ -6,8 +6,9 @@ import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
 
 public interface BoothService {
     AllBooth getAllbooth(String userHash);
-    BoothDetail getBooth(Long id, String userHash);
-    String updateLikes(Long id, String userHash);
+    BoothDetail getBooth(int boothNum, String categori, String userHash);
+    String updateLikes(int boothNum, String categori, String userHash);
+    BoothEntity findByBoothnumAndCategori(int boothnum, String categori);
 
     BoothEntity findById(Long id);
 

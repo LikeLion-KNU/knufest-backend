@@ -19,7 +19,7 @@ import java.util.List;
 public class CommentController {
     private final CommentService service;
     @GetMapping("booth/{boothId}/comment")
-    @Operation(summary = "추가 댓글 조회", description = "해당 부스의 추가 댓글내용을 제공한다. perpage = 요청당 댓글 개수 한 페이지 당 통일되게 보내야 됨, page = 요청 댓글 set 순번. order = 댓글 정렬순서 최신순은 'desc' 오래된 순은 'default' 이다. ")
+    @Operation(summary = "추가 댓글 조회", description = "해당 부스의 추가 댓글내용을 제공한다. perpage = 요청당 댓글 개수 한 페이지 당 통일되게 보내야 됨, page = 요청 댓글 set 순번. order = 댓글 정렬순서 최신순은 'desc' 오래된 순은 'default' 이다. deletable은 유저기반 삭제 가능 여부.")
     public ResponseEntity<List<Comment>> getExtraCommentPage(
             @PathVariable("boothId") Long boothId,
             @RequestParam("perpage") int perpage,

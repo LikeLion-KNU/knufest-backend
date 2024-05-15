@@ -45,10 +45,13 @@ public class BoothServiceImpl implements BoothService{
                                 .id(booth.getId())
                                 .boothName(booth.getBoothName())
                                 .likes(booth.getLikes())
+                                .categori(booth.getCategori())
+                                .boothnum(booth.getBoothnum())
                                 .Likable(true)
                         .build());
             }
 
+            // Likable Service
             if(!userBoothEntityList.isEmpty()){
                 for(UserBoothEntity userBooth : userBoothEntityList){
                     Booth tempbooth = boothDtos.get(userBooth.getBooth().getId().intValue()-1);
@@ -66,29 +69,34 @@ public class BoothServiceImpl implements BoothService{
     }
 
     @Override
-    public BoothDetail getBooth(Long boothId, String userHash) {
-        Optional<BoothEntity> boothOp;
+    public BoothDetail getBooth(int boothnum, String categori, String userHash) {
+        Optional<BoothEntity> boothOp = boothrepository.findByBoothnumAndCategori(boothnum, categori);
 
-        Optional<UserBoothEntity> userBoothEntity = userBoothRepository.findByUserIdAndBoothId(userService.getUserByHash(userHash).getId(), boothId);
+        if(boothOp.isEmpty()){
+            throw new NoExistException("해당 부스 정보가 없습니다. (id 확인 요망)");
+        }
+
+        Optional<UserBoothEntity> userBoothEntity = userBoothRepository.findByUserIdAndBoothId(userService.getUserByHash(userHash).getId(), boothOp.get().getId());
         BoothEntity booth;
 
         boolean temp;
+
+
         if(userBoothEntity.isEmpty()){
-            boothOp = boothrepository.findById(boothId);
             temp = true;
-            if(boothOp.isEmpty()){
-                throw new NoExistException("해당 부스 정보가 없습니다. (id 확인요망)");
-            }else{
-                booth = boothOp.get();
-            }
+            booth = boothOp.get();
+
         }else{
             temp = false;
             booth = userBoothEntity.get().getBooth();
         }
+
             return BoothDetail.builder()
                     .id(booth.getId())
                     .boothName(booth.getBoothName())
                     .likes(booth.getLikes())
+                    .boothnum(booth.getBoothnum())
+                    .categori(booth.getCategori())
                     .urls(booth.getUrls())
                     .Likable(temp)
                     .comments(commentService.getCommentPage(booth.getId(),5,1, "default", userHash))
@@ -96,33 +104,32 @@ public class BoothServiceImpl implements BoothService{
     }
 
     @Override
-    public String updateLikes(Long boothId, String userHash) {
+    public String updateLikes(int boothnum, String categori, String userHash) {
+
+        Optional<BoothEntity> boothOp = boothrepository.findByBoothnumAndCategori(boothnum, categori);
+        if(boothOp.isEmpty()){
+            throw new NoExistException("해당 부스 정보가 없습니다. (id 확인 요망)");
+        }
 
         UserEntity user = userService.getUserByHash(userHash);
-        Optional<UserBoothEntity> userBoothEntity = userBoothRepository.findByUserIdAndBoothId(user.getId(), boothId);
+        Optional<UserBoothEntity> userBoothEntity = userBoothRepository.findByUserIdAndBoothId(user.getId(), boothOp.get().getId());
         UserBoothEntity userBooth;
 
         BoothEntity booth;
 
         if(userBoothEntity.isEmpty()){
-            Optional<BoothEntity> boothOp = boothrepository.findById(boothId);
 
-            if(boothOp.isEmpty()){
-                throw new NoExistException("해당 부스 정보가 없습니다. (id 확인 요망)");
-            }else{
-                booth = boothOp.get();
-                booth.setLikes(booth.getLikes()+1);
-                boothrepository.save(booth);
+            booth = boothOp.get();
+            booth.setLikes(booth.getLikes()+1);
+            boothrepository.save(booth);
 
-                userBooth = UserBoothEntity.builder()
-                        .booth(booth)
-                        .user(user)
-                        .build();
+            userBooth = UserBoothEntity.builder()
+                    .booth(booth)
+                    .user(user)
+                    .build();
 
-                userBoothRepository.save(userBooth);
-                return "좋아요를 업데이트(+1) 하였습니다.";
-            }
-
+            userBoothRepository.save(userBooth);
+            return "좋아요를 업데이트(+1) 하였습니다.";
 
         }else{
             booth = userBoothEntity.get().getBooth();
@@ -141,6 +148,16 @@ public class BoothServiceImpl implements BoothService{
         Optional<BoothEntity> boothOp = boothrepository.findById(id);
         if(boothOp.isEmpty()){
             throw new NoExistException("해당 부스 정보가 없습니다. (id 확인 요망)");
+        }else{
+            return boothOp.get();
+        }
+    }
+
+    @Override
+    public BoothEntity findByBoothnumAndCategori(int boothnum, String categori){
+        Optional<BoothEntity> boothOp = boothrepository.findByBoothnumAndCategori(boothnum, categori);
+        if(boothOp.isEmpty()){
+            throw new NoExistException(("해당 부스 정보가 없습니다. (id 확인 요망)"));
         }else{
             return boothOp.get();
         }

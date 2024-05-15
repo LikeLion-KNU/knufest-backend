@@ -16,4 +16,5 @@ public interface UserBoothRepository extends JpaRepository<UserBoothEntity, Long
     List<UserBoothEntity> findAllByUserId(Long userId);
 
     Optional<UserBoothEntity> findByUserIdAndBoothId(Long userId, Long BoothId);
+
 }

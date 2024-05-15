@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface BoothRepository extends JpaRepository<BoothEntity, Long> {
 
     Optional<BoothEntity> findById(Long id);
+
+    Optional<BoothEntity> findByBoothnumAndCategori(int boothnum, String categori);
 }
