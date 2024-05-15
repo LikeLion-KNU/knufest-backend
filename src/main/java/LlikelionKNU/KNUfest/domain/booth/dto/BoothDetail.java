@@ -12,6 +12,8 @@ public class BoothDetail {
     private Long id;
     private String boothName;
     private int likes;
+    private String categori;
+    private int boothnum;
     private List<String> urls;
     private boolean Likable;
 

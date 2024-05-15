@@ -13,5 +13,7 @@ public class Booth {
     private Long id;
     private String boothName;
     private int likes;
+    private String categori;
+    private int boothnum;
     private boolean Likable;
 }

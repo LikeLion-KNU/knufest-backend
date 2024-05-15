@@ -18,7 +18,7 @@ public class BoothController {
     private final BoothService service;
 
     @GetMapping()
-    @Operation(summary = "모든 부스정보 조회", description = "모든 부스의 id와 좋아요를 보내준다. 그 부스 목록에 뜨는 걸로 쓰면 됨")
+    @Operation(summary = "모든 부스정보 조회", description = "모든 부스의 id와 좋아요를 보내준다. 그 부스 목록에 뜨는 걸로 쓰면 됨.  likable은 유저별 좋아요 누르기 가능여부")
     public ResponseEntity<AllBooth> getAllbooth(
             @RequestParam("userHash") String userHash
     ){
@@ -26,23 +26,25 @@ public class BoothController {
         return ResponseEntity.ok().body(booths);
     }
 
-    @GetMapping("{boothId}")
-    @Operation(summary = "특정 부스정보 조회", description = "특정 부스의 id, 좋아요, 오래된 순 댓글 5개를 보내준다. 부스 별 페이지에 갖다 쓰면 됨" )
+    @GetMapping("/{categori}/{boothNum}")
+    @Operation(summary = "특정 부스정보 조회", description = "특정 부스의 id, 좋아요, 오래된 순 댓글 5개를 보내준다. 부스 별 페이지에 갖다 쓰면 됨. categori: 부스 종류, boothnum: 부스번호임. likable은 유저별 좋아요 누르기 가능여부" )
     public ResponseEntity<BoothDetail> getBooth(
-            @PathVariable("boothId") Long boothId,
+            @PathVariable("boothNum") int boothNum,
+            @PathVariable("categori") String categori,
             @RequestParam("userHash") String userHash
     ){
-        BoothDetail boothDto = service.getBooth(boothId, userHash);
+        BoothDetail boothDto = service.getBooth(boothNum, categori, userHash);
         return ResponseEntity.ok().body(boothDto);
     }
 
-    @PatchMapping("{boothId}")
+    @PatchMapping("{categori}/{boothNum}")
     @Operation(summary = "특정 부스 좋아요 업데이트", description = "특정 부스의 좋아요를 변경한다.")
     public ResponseEntity<BasicResponse> updateLikes(
-            @PathVariable("boothId") Long boothId,
+            @PathVariable("boothNum") int boothNum,
+            @PathVariable("categori") String categori,
             @RequestParam("userHash") String userHash
     ){
-        String message = service.updateLikes(boothId, userHash);
+        String message = service.updateLikes(boothNum, categori, userHash);
         BasicResponse response = BasicResponse.builder()
                 .message(message)
                 .status(200)
