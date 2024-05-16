@@ -42,7 +42,6 @@ public class BoothServiceImpl implements BoothService{
             boothDtos = new ArrayList<>();
             for(BoothEntity booth : boothes){
                 boothDtos.add(Booth.builder()
-                                .id(booth.getId())
                                 .boothName(booth.getBoothName())
                                 .likes(booth.getLikes())
                                 .categori(booth.getCategori())
@@ -81,7 +80,6 @@ public class BoothServiceImpl implements BoothService{
 
         boolean temp;
 
-
         if(userBoothEntity.isEmpty()){
             temp = true;
             booth = boothOp.get();
@@ -92,7 +90,6 @@ public class BoothServiceImpl implements BoothService{
         }
 
             return BoothDetail.builder()
-                    .id(booth.getId())
                     .boothName(booth.getBoothName())
                     .likes(booth.getLikes())
                     .boothnum(booth.getBoothnum())

@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Builder
 public class BoothDetail {
-    private Long id;
     private String boothName;
     private int likes;
     private String categori;
