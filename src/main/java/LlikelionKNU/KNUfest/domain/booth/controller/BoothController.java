@@ -27,7 +27,7 @@ public class BoothController {
     }
 
     @GetMapping("/{categori}/{boothNum}")
-    @Operation(summary = "특정 부스정보 조회", description = "특정 부스의 id, 좋아요, 오래된 순 댓글 5개를 보내준다. 부스 별 페이지에 갖다 쓰면 됨. categori: 부스 종류, boothnum: 부스번호임. likable은 유저별 좋아요 누르기 가능여부" )
+    @Operation(summary = "특정 부스정보 조회", description = "특정 부스의 id, 좋아요, 오래된 순 댓글 5개를 보내준다. 부스 별 페이지에 갖다 쓰면 됨. categori: 부스 종류(주점 : pub, 복합 : comp, 기타 : other), boothnum: 부스번호임. likable은 유저별 좋아요 누르기 가능여부" )
     public ResponseEntity<BoothDetail> getBooth(
             @PathVariable("boothNum") int boothNum,
             @PathVariable("categori") String categori,

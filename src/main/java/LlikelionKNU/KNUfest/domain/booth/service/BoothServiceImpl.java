@@ -25,7 +25,6 @@ public class BoothServiceImpl implements BoothService{
     private final BoothRepository boothrepository;
     private final UserBoothRepository userBoothRepository;
 
-    private final CommentService commentService;
     private final UserService userService;
 
     @Override
@@ -96,7 +95,6 @@ public class BoothServiceImpl implements BoothService{
                     .categori(booth.getCategori())
                     .urls(booth.getUrls())
                     .Likable(temp)
-                    .comments(commentService.getCommentPage(booth.getId(),5,1, "default", userHash))
                     .build();
     }
 

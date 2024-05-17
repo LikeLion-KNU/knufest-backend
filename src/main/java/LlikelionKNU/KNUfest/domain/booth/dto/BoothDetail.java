@@ -16,5 +16,4 @@ public class BoothDetail {
     private List<String> urls;
     private boolean Likable;
 
-    private List<Comment> comments;
 }
