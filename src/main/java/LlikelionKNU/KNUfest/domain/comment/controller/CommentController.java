@@ -23,12 +23,12 @@ public class CommentController {
     public ResponseEntity<List<Comment>> getExtraCommentPage(
             @PathVariable("boothNum") int boothNum,
             @PathVariable("categori") String categori,
-            @RequestParam("perpage") int perpage,
+            // @RequestParam("perpage") int perpage,
             @RequestParam("page") int page,
-            @RequestParam("order") String order,
+            // @RequestParam("order") String order,
             @RequestParam("userHash") String userHash
     ){
-        List<Comment> result = service.getCommentPage(boothNum, categori, perpage, page, order, userHash);
+        List<Comment> result = service.getCommentPage(boothNum, categori, 5, page, "desc", userHash);
         return ResponseEntity.ok().body(result);
     }
 
