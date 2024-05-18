@@ -27,12 +27,12 @@ public class CommentServiceImpl implements CommentService{
 
 
     @Override
-    public List<Comment> getCommentPage(Long boothId, int perpage, int page, String order, String userHash) {
+    public List<Comment> getCommentPage(int boothNum, String categori, int perpage, int page, String order, String userHash) {
 
-        Optional<BoothEntity> boothOp =  boothRepository.findById(boothId);
+        Optional<BoothEntity> boothOp =  boothRepository.findByBoothnumAndCategori(boothNum, categori);
         BoothEntity booth;
         if(boothOp.isEmpty()){
-            throw new NoExistException("해당 부스 정보가 없습니다. (id 확인 요망)");
+            throw new NoExistException("해당 부스 정보가 없습니다. (카테고리, 부스번호 확인 요망)");
         }else{
             booth = boothOp.get();
         }
@@ -64,14 +64,14 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public Long postComment(Long boothId, CommentRequest commentRequest, String userHash) {
+    public Long postComment(int boothNum, String categori, CommentRequest commentRequest, String userHash) {
 
 
         UserEntity user = userService.getUserByHash(userHash);
-        Optional<BoothEntity> boothOp =  boothRepository.findById(boothId);
+        Optional<BoothEntity> boothOp =  boothRepository.findByBoothnumAndCategori(boothNum, categori);
         BoothEntity booth;
         if(boothOp.isEmpty()){
-            throw new NoExistException("해당 부스 정보가 없습니다. (id 확인 요망)");
+            throw new NoExistException("해당 부스 정보가 없습니다. (카테고리, 부스번호 확인 요망)");
         }else{
             booth = boothOp.get();
         }

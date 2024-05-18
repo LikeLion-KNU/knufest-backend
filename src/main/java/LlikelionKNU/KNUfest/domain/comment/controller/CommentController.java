@@ -18,31 +18,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService service;
-    @GetMapping("booth/{boothId}/comment")
-    @Operation(summary = "추가 댓글 조회", description = "해당 부스의 추가 댓글내용을 제공한다. perpage = 요청당 댓글 개수 한 페이지 당 통일되게 보내야 됨, page = 요청 댓글 set 순번. order = 댓글 정렬순서 최신순은 'desc' 오래된 순은 'default' 이다. deletable은 유저기반 삭제 가능 여부.")
+    @GetMapping("booth/{categori}/{boothNum}/comment")
+    @Operation(summary = "추가 댓글 조회", description = "해당 부스의 추가 댓글내용을 제공한다. boothNum(부스 번호), categori(pub : 주점, comp : 복합, other: 기타)를 넘겨줘야 함. perpage = 요청당 댓글 개수 한 페이지 당 통일되게 보내야 됨, page = 요청 댓글 set 순번. order = 댓글 정렬순서 최신순은 'desc' 오래된 순은 'default' 이다. deletable은 유저기반 삭제 가능 여부.")
     public ResponseEntity<List<Comment>> getExtraCommentPage(
-            @PathVariable("boothId") Long boothId,
+            @PathVariable("boothNum") int boothNum,
+            @PathVariable("categori") String categori,
             @RequestParam("perpage") int perpage,
             @RequestParam("page") int page,
             @RequestParam("order") String order,
             @RequestParam("userHash") String userHash
     ){
-        List<Comment> result = service.getCommentPage(boothId, perpage, page, order, userHash);
+        List<Comment> result = service.getCommentPage(boothNum, categori, perpage, page, order, userHash);
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping("booth/{boothId}/comment")
-    @Operation(summary = "특정부스 댓글 생성", description = "특정 부스에 댓글을 생성한다.")
+    @PostMapping("booth/{categori}/{boothNum}/comment")
+    @Operation(summary = "특정부스 댓글 생성", description = "특정 부스에 댓글을 생성한다. boothNum(부스 번호), categori(pub : 주점, comp : 복합, other: 기타)를 넘겨줘야 함.")
     public ResponseEntity<BasicResponse> postComment(
-            @PathVariable("boothId") Long boothId,
+            @PathVariable("boothNum") int boothNum,
+            @PathVariable("categori") String categori,
             @RequestParam("userHash") String userHash,
             @RequestBody CommentRequest commentRequest
     ){
 
-        Long id = service.postComment(boothId, commentRequest, userHash);
+        Long id = service.postComment(boothNum, categori, commentRequest, userHash);
 
         BasicResponse response = BasicResponse.builder()
-                .message(boothId+"번 부스에 " + id + "번째 댓글을 생성하였습니다.")
+                .message("부스에 댓글을 생성하였습니다.")
                 .status(201)
                 .timeStamp(LocalDateTime.now())
                 .build();
@@ -51,7 +53,7 @@ public class CommentController {
     }
 
     @DeleteMapping("comment/{commentId}")
-    @Operation(summary = "특정 댓글 삭제", description = "특정 댓글을 userHash 값을 통해 비교하여 삭제한다.")
+    @Operation(summary = "특정 댓글 삭제", description = "특정 댓글을 userHash 값을 통해 비교하여 삭제한다. 해당 댓글의 id 값을 보내야함")
     public ResponseEntity<BasicResponse> deleteComment(
             @PathVariable("commentId") Long commentId,
             @RequestParam("userHash") String userHash
