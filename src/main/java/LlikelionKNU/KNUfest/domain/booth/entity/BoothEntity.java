@@ -45,6 +45,6 @@ public class BoothEntity extends BasicEntity {
             name = "URL_LIST",
             joinColumns = @JoinColumn(name="booth_id", referencedColumnName = "id")
     )
-    @Column(length = 300)
+    @Column(columnDefinition = "VARCHAR(300)")
     private List<String> urls;
 }
