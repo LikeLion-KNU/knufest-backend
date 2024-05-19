@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class BoothDetail {
     private String boothName;
+    private String boothDescription;
     private int likes;
     private String categori;
     private int boothnum;

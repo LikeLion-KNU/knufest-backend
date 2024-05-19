@@ -31,6 +31,8 @@ public class BoothEntity extends BasicEntity {
     @Column(name="booth_num")
     private int boothnum;
 
+    @Column(name="description")
+    private String description;
 
     @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;

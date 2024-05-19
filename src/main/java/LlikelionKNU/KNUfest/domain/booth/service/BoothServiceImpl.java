@@ -87,9 +87,9 @@ public class BoothServiceImpl implements BoothService{
             temp = false;
             booth = userBoothEntity.get().getBooth();
         }
-
             return BoothDetail.builder()
                     .boothName(booth.getBoothName())
+                    .boothDescription(booth.getDescription())
                     .likes(booth.getLikes())
                     .boothnum(booth.getBoothnum())
                     .categori(booth.getCategori())

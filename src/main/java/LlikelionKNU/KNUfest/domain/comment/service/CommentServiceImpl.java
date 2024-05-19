@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService{
 
 
     @Override
-    public List<Comment> getCommentPage(int boothNum, String categori, int perpage, int page, String order, String userHash) {
+    public List<Comment> getCommentPage(int boothNum, String categori, int page, String userHash) {
 
         Optional<BoothEntity> boothOp =  boothRepository.findByBoothnumAndCategori(boothNum, categori);
         BoothEntity booth;
@@ -40,13 +40,9 @@ public class CommentServiceImpl implements CommentService{
         List<CommentEntity> comments;
         List<Comment> result = new ArrayList<>();
 
-        int offset = (page-1) * perpage;
+        int offset = (page-1) * 5;
 
-        if(order.equals("desc")){
-            comments = commentRepository.findAllOrderByIdDESC(booth.getId(), perpage, offset);
-        }else{
-            comments = commentRepository.findAllOrderById(booth.getId(), perpage, offset);
-        }
+        comments = commentRepository.findAllOrderByIdDESC(booth.getId(), 5, offset);
 
         if(!comments.isEmpty()) {
             for (CommentEntity c : comments) {
