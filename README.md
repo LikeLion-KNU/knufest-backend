@@ -6,7 +6,7 @@
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href=""><img src=""width="100px;" alt=""/><br /><sub><b>이동건 : </b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="https://private-user-images.githubusercontent.com/80188977/331893463-c0a16a58-1ede-40eb-b877-984b9335ee68.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTYxNDQxOTMsIm5iZiI6MTcxNjE0Mzg5MywicGF0aCI6Ii84MDE4ODk3Ny8zMzE4OTM0NjMtYzBhMTZhNTgtMWVkZS00MGViLWI4NzctOTg0YjkzMzVlZTY4LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTE5VDE4MzgxM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWMxNWFmZWQ1MGIxMGMzYTAwZTAzYzc3YjUxZDRjNjI3ZDAwNzUzYTMwYThmZTU0OGE3NWQ1MDNmZmZmNTZlMzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.wnWC-LXFYI03buRqadQP0LtWY6beAEpkHxEMSM2EJNk"width="100px;" alt=""/><br /><sub><b>이동건 : @himodu </b></sub></a><br /></td>
       <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>최정식 : </b></sub></a><br /></td>
   </tbody>
 </table>
