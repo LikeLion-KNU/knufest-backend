@@ -1,5 +1,31 @@
 # knufest-BE
-2024 경북대학교 안내웹 백엔드 서버입니다.
+2024 경북대학교 대동제 "하푸루나"의 웹페이지 백엔드 서버입니다.
+
+# 개발 기간
+2024.05.14 ~ NOW
+
+# 사용 기술
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white">
+<img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"> 
+<img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=GitHub Actions&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=white">
+
+
+# Entity 구성
+1. Booth: 축제 부스의 정보, 부스 번호와 분류를 구별한 부스 정보.
+2. Comment: 부스 게시판의 댓글 정보, 부스별 댓글 데이터를 저장.
+3. User: 웹페이지에 접속한 유저의 고유 Hash값 정보
+
+# 주요 기능
+1. 부스 정보를 조회 (모든 부스 정보 / 특정 부스 정보)
+2. 부스별 좋아요 기능
+3. 부스별 댓글을 생성, 삭제 기능.
+4. 웹페이지에 접근한 순수 유저의 수를 세는 기능.
+
+
 
 # SpringBoot + gradle
 
@@ -67,8 +93,12 @@ docker pull {docker username}/{image name}
 ```
 docker run -it -d --name {컨테이너 명} -p 8080:8080 --net {docker network} -v {docker volume} {이미지 명} sleep infinity
 ```
+
 - d : 백그라운드(daemon)로 컨테이너 실행
 - p : in/out bound port 설정
 - net : docker network 설정
 - v : docker volume 설정
 - sleep infinity : 무중단 설정 
+
+
+#GITHUB ACTION
