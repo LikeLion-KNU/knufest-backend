@@ -42,6 +42,7 @@ public class BoothServiceImpl implements BoothService{
             for(BoothEntity booth : boothes){
                 boothDtos.add(Booth.builder()
                                 .boothName(booth.getBoothName())
+                                .host(booth.getHost())
                                 .likes(booth.getLikes())
                                 .categori(booth.getCategori())
                                 .boothnum(booth.getBoothnum())
@@ -89,6 +90,7 @@ public class BoothServiceImpl implements BoothService{
         }
             return BoothDetail.builder()
                     .boothName(booth.getBoothName())
+                    .host(booth.getHost())
                     .boothDescription(booth.getDescription())
                     .likes(booth.getLikes())
                     .boothnum(booth.getBoothnum())

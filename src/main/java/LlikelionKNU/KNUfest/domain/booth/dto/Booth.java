@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class Booth {
     private String boothName;
+    private String host;
     private int likes;
     private String categori;
     private int boothnum;
