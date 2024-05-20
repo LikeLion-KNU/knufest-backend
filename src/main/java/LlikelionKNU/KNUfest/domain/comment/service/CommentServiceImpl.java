@@ -40,7 +40,7 @@ public class CommentServiceImpl implements CommentService{
         List<CommentEntity> comments;
         List<Comment> result = new ArrayList<>();
 
-        int offset = (page-1) * 5;
+        int offset = (page-1) * 20;
 
         comments = commentRepository.findAllOrderByIdDESC(booth.getId(), 20, offset);
 
