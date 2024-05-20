@@ -37,6 +37,10 @@ public class BoothEntity extends BasicEntity {
     @Column(name="host")
     private String host;
 
+    @Column(name="commentCount")
+    @ColumnDefault("0")
+    private int commentCount;
+
     @OneToMany(mappedBy = "booth", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;
 

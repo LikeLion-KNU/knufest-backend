@@ -13,6 +13,7 @@ public class BoothDetail {
     private String host;
     private String boothDescription;
     private int likes;
+    private int commentCount;
     private String categori;
     private int boothnum;
     private List<String> urls;
