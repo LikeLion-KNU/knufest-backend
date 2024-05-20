@@ -82,11 +82,17 @@ public class CommentServiceImpl implements CommentService{
     public void deleteComment(Long commentId, String userHash) {
         Optional<CommentEntity> commentOp = commentRepository.findById(commentId);
 
+        CommentEntity comment;
+        BoothEntity booth;
         if(commentOp.isEmpty()) {
             throw new NoExistException("해당 댓글은 없습니다. (id 확인 요망)");
         }else{
             if(commentOp.get().getUser().getUserHash().equals(userHash)){
-                commentRepository.delete(commentOp.get());
+                 comment = commentOp.get();
+                 booth = comment.getBooth();
+                 booth.setCommentCount(booth.getCommentCount()-1);
+                 boothRepository.save(booth);
+                commentRepository.delete(comment);
             }else{
                 throw new UserHashWrongException("userHash 값이 일치하지 않습니다.");
             }
