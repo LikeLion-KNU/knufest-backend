@@ -93,6 +93,7 @@ public class BoothServiceImpl implements BoothService{
                     .host(booth.getHost())
                     .boothDescription(booth.getDescription())
                     .likes(booth.getLikes())
+                    .commentCount(booth.getCommentCount())
                     .boothnum(booth.getBoothnum())
                     .categori(booth.getCategori())
                     .urls(booth.getUrls())

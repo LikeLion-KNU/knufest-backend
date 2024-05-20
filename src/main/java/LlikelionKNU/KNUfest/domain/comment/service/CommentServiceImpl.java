@@ -70,6 +70,7 @@ public class CommentServiceImpl implements CommentService{
             throw new NoExistException("해당 부스 정보가 없습니다. (카테고리, 부스번호 확인 요망)");
         }else{
             booth = boothOp.get();
+            booth.setCommentCount(booth.getCommentCount()+1);
         }
 
         CommentEntity newComment = Comment.toEntity(commentRequest, booth, user);
