@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService{
 
         int offset = (page-1) * 5;
 
-        comments = commentRepository.findAllOrderByIdDESC(booth.getId(), 5, offset);
+        comments = commentRepository.findAllOrderByIdDESC(booth.getId(), 20, offset);
 
         if(!comments.isEmpty()) {
             for (CommentEntity c : comments) {
