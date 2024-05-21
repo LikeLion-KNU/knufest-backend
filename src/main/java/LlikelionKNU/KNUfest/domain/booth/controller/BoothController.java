@@ -2,6 +2,7 @@ package LlikelionKNU.KNUfest.domain.booth.controller;
 
 import LlikelionKNU.KNUfest.domain.booth.dto.AllBooth;
 import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetail;
+import LlikelionKNU.KNUfest.domain.booth.dto.BoothLike;
 import LlikelionKNU.KNUfest.global.basic.BasicResponse;
 import LlikelionKNU.KNUfest.domain.booth.service.BoothService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,18 +40,19 @@ public class BoothController {
 
     @PatchMapping("{categori}/{boothNum}")
     @Operation(summary = "특정 부스 좋아요 업데이트", description = "특정 부스의 좋아요를 변경한다.")
-    public ResponseEntity<BasicResponse> updateLikes(
+    public ResponseEntity<BoothLike> updateLikes(
             @PathVariable("boothNum") int boothNum,
             @PathVariable("categori") String categori,
             @RequestParam("userHash") String userHash
     ){
-        String message = service.updateLikes(boothNum, categori, userHash);
-        BasicResponse response = BasicResponse.builder()
-                .message(message)
-                .status(200)
-                .timeStamp(LocalDateTime.now())
-                .build();
-        return ResponseEntity.ok().body(response);
+        BoothLike boothLike= service.updateLikes(boothNum, categori, userHash);
+//        String message = service.updateLikes(boothNum, categori, userHash);
+//        BasicResponse response = BasicResponse.builder()
+//                .message(message)
+//                .status(200)
+//                .timeStamp(LocalDateTime.now())
+//                .build();
+        return ResponseEntity.ok().body(boothLike);
     }
 
 }

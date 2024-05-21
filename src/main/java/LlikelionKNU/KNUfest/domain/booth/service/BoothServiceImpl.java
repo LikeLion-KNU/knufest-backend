@@ -3,6 +3,7 @@ package LlikelionKNU.KNUfest.domain.booth.service;
 import LlikelionKNU.KNUfest.domain.booth.dto.AllBooth;
 import LlikelionKNU.KNUfest.domain.booth.dto.BoothDetail;
 import LlikelionKNU.KNUfest.domain.booth.dto.Booth;
+import LlikelionKNU.KNUfest.domain.booth.dto.BoothLike;
 import LlikelionKNU.KNUfest.domain.booth.entity.BoothEntity;
 import LlikelionKNU.KNUfest.domain.booth.repository.BoothRepository;
 import LlikelionKNU.KNUfest.domain.comment.service.CommentService;
@@ -102,7 +103,7 @@ public class BoothServiceImpl implements BoothService{
     }
 
     @Override
-    public String updateLikes(int boothnum, String categori, String userHash) {
+    public BoothLike updateLikes(int boothnum, String categori, String userHash) {
 
         Optional<BoothEntity> boothOp = boothrepository.findByBoothnumAndCategori(boothnum, categori);
         if(boothOp.isEmpty()){
@@ -114,6 +115,9 @@ public class BoothServiceImpl implements BoothService{
         UserBoothEntity userBooth;
 
         BoothEntity booth;
+
+        BoothLike boothLikeDto;
+        String message;
 
         if(userBoothEntity.isEmpty()){
 
@@ -127,7 +131,9 @@ public class BoothServiceImpl implements BoothService{
                     .build();
 
             userBoothRepository.save(userBooth);
-            return "좋아요를 업데이트(+1) 하였습니다.";
+
+
+            message = "좋아요를 업데이트(+1) 하였습니다.";
 
         }else{
             booth = userBoothEntity.get().getBooth();
@@ -136,9 +142,15 @@ public class BoothServiceImpl implements BoothService{
 
             userBoothRepository.delete(userBoothEntity.get());
 
-            return "좋아요를 업데이트(-1) 하였습니다.";
+            message = "좋아요를 업데이트(-1) 하였습니다.";
         }
 
+        boothLikeDto = BoothLike.builder()
+                .likeNum(booth.getLikes())
+                .message(message)
+                .build();
+
+        return boothLikeDto;
     }
 
     @Override
