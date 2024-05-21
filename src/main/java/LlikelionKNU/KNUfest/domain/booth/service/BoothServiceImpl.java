@@ -54,9 +54,12 @@ public class BoothServiceImpl implements BoothService{
             // Likable Service
             if(!userBoothEntityList.isEmpty()){
                 for(UserBoothEntity userBooth : userBoothEntityList){
-                    Booth tempbooth = boothDtos.get(userBooth.getBooth().getId().intValue()-1);
+
+                    BoothEntity booth = userBooth.getBooth();
+                    int index = boothes.indexOf(booth);
+                    Booth tempbooth = boothDtos.get(index);
                     tempbooth.setLikable(false);
-                    boothDtos.set(userBooth.getBooth().getId().intValue()-1, tempbooth);
+                    boothDtos.set(index, tempbooth);
                 }
             }
 
