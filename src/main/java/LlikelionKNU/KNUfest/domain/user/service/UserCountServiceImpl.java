@@ -3,9 +3,10 @@ package LlikelionKNU.KNUfest.domain.user.service;
 import LlikelionKNU.KNUfest.domain.user.entity.UserCountEntity;
 import LlikelionKNU.KNUfest.domain.user.repository.UserCountRepository;
 import LlikelionKNU.KNUfest.global.error.NoExistException;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class UserCountServiceImpl implements UserCountService {
     private final UserCountRepository userCountRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public Long getUserCount() {
 
         Optional<UserCountEntity> userCountEntity = userCountRepository.findById(1L);

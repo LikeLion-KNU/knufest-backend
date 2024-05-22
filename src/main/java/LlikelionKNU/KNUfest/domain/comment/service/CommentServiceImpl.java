@@ -10,9 +10,10 @@ import LlikelionKNU.KNUfest.domain.user.entity.UserEntity;
 import LlikelionKNU.KNUfest.domain.user.service.UserService;
 import LlikelionKNU.KNUfest.global.error.NoExistException;
 import LlikelionKNU.KNUfest.global.error.UserHashWrongException;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class CommentServiceImpl implements CommentService{
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<Comment> getCommentPage(int boothNum, String categori, int page, String userHash) {
 
         Optional<BoothEntity> boothOp =  boothRepository.findByBoothnumAndCategori(boothNum, categori);
@@ -62,8 +64,8 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
+    @Transactional
     public Long postComment(int boothNum, String categori, CommentRequest commentRequest, String userHash) {
-
 
         UserEntity user = userService.getUserByHash(userHash);
         Optional<BoothEntity> boothOp =  boothRepository.findByBoothnumAndCategori(boothNum, categori);

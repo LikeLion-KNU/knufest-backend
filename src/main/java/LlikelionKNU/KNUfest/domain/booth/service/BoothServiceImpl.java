@@ -12,9 +12,10 @@ import LlikelionKNU.KNUfest.domain.user.entity.UserEntity;
 import LlikelionKNU.KNUfest.domain.user.repository.UserBoothRepository;
 import LlikelionKNU.KNUfest.domain.user.service.UserService;
 import LlikelionKNU.KNUfest.global.error.NoExistException;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class BoothServiceImpl implements BoothService{
     private final UserService userService;
 
     @Override
+    @Transactional(readOnly = true)
     public AllBooth getAllbooth(String userHash) {
 
         List<BoothEntity> boothes = boothrepository.findAll();
@@ -74,6 +76,7 @@ public class BoothServiceImpl implements BoothService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BoothDetail getBooth(int boothnum, String categori, String userHash) {
         Optional<BoothEntity> boothOp = boothrepository.findByBoothnumAndCategori(boothnum, categori);
 
