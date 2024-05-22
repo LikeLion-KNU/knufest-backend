@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserCountServiceImpl implements UserCountService {
     private final UserCountRepository userCountRepository;
