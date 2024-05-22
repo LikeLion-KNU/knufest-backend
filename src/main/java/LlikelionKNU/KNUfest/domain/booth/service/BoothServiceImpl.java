@@ -12,6 +12,7 @@ import LlikelionKNU.KNUfest.domain.user.entity.UserEntity;
 import LlikelionKNU.KNUfest.domain.user.repository.UserBoothRepository;
 import LlikelionKNU.KNUfest.domain.user.service.UserService;
 import LlikelionKNU.KNUfest.global.error.NoExistException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BoothServiceImpl implements BoothService{
 
