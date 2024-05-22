@@ -32,7 +32,6 @@ public class BoothServiceImpl implements BoothService{
     private final UserService userService;
 
     @Override
-    @Transactional(readOnly = true)
     public AllBooth getAllbooth(String userHash) {
 
         List<BoothEntity> boothes = boothrepository.findAll();
@@ -76,7 +75,6 @@ public class BoothServiceImpl implements BoothService{
     }
 
     @Override
-    @Transactional(readOnly = true)
     public BoothDetail getBooth(int boothnum, String categori, String userHash) {
         Optional<BoothEntity> boothOp = boothrepository.findByBoothnumAndCategori(boothnum, categori);
 

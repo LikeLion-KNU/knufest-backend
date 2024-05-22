@@ -17,7 +17,6 @@ public class UserCountServiceImpl implements UserCountService {
     private final UserCountRepository userCountRepository;
 
     @Override
-    @Transactional(readOnly = true)
     public Long getUserCount() {
 
         Optional<UserCountEntity> userCountEntity = userCountRepository.findById(1L);

@@ -30,7 +30,6 @@ public class CommentServiceImpl implements CommentService{
 
 
     @Override
-    @Transactional(readOnly = true)
     public List<Comment> getCommentPage(int boothNum, String categori, int page, String userHash) {
 
         Optional<BoothEntity> boothOp =  boothRepository.findByBoothnumAndCategori(boothNum, categori);
@@ -64,7 +63,6 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    @Transactional
     public Long postComment(int boothNum, String categori, CommentRequest commentRequest, String userHash) {
 
         UserEntity user = userService.getUserByHash(userHash);
