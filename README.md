@@ -118,3 +118,81 @@ docker run -it -d --name {컨테이너 명} -p 8080:8080 --net {docker network} 
 
 
 # GITHUB ACTION
+workflow.yml
+```
+name: Java CI with Gradle
+
+# 동작 조건 설정 : main 브랜치에 push 혹은 pull request가 발생할 경우 동작한다.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    types: closed
+
+    
+permissions:
+  contents: read
+
+jobs:
+  # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시하는 과정
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    # 1. Java 17 세팅
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Run chmod to make gradlew executable
+      run: chmod +x ./gradlew
+
+    # 2. Spring Boot 애플리케이션 빌드
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: clean bootJar
+
+    # 3. Docker 이미지 빌드
+    - name: docker image build
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/knufest .
+
+    # 4. DockerHub 로그인
+    - name: docker login
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    # 5. Docker Hub 이미지 푸시
+    - name: docker Hub push
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/knufest
+
+  # 위 과정에서 푸시한 이미지를 ec2에서 풀받아서 실행시키는 과정 
+  run-docker-image-on-ec2:
+    # build-docker-image (위)과정이 완료되어야 실행됩니다.
+    needs: build-docker-image
+    runs-on: self-hosted
+
+    steps:
+      # 1. 최신 이미지를 풀받습니다
+      - name: docker pull
+        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/knufest
+      
+      # 2. 기존의 컨테이너를 중지시킵니다
+      - name: docker stop container
+        run: sudo docker stop knufest 2>/dev/null || true
+
+      # 3. 최신 이미지를 컨테이너화하여 실행시킵니다
+      - name: docker run new container
+        run: sudo docker run --name knufest --rm -d -p 8080:8080 --net in-net ${{ secrets.DOCKERHUB_USERNAME }}/knufest sleep infinity
+
+      # 4. 미사용 이미지를 정리합니다
+      - name: delete old docker image
+        run: sudo docker system prune -f
+```
+1. build-docker-image : main branch 에 push or pull request 가 발생할 경우 main branch 의 코드를 바탕으로 docker image 를 docker hub에 push 한다.
+2. run-docker-image-on-ec2 : push 된 docker image를 pull 하여 ec2 인스턴스에서 재실행
