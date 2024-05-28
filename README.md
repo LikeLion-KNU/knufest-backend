@@ -1,3 +1,7 @@
+# knufest Readme
+https://github.com/LikeLion-KNU/knufest-frontend
+
+
 # knufest-BE
 2024 경북대학교 대동제 "하푸루나"의 웹페이지 백엔드 서버입니다.
 
